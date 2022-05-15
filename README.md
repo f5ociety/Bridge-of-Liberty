@@ -1,4 +1,4 @@
-# Telegram-View-Bot
+# Telegram-Search-Bot (Anticensorship service)
 Проект для Хакатон от [**РосКомСвободы**](https://roskomsvoboda.org/) ([**demhack 4**](https://demhack.ru/)).
 
 Телеграм Бот для доступа к ифнормации прямо внтри мессенджера. 

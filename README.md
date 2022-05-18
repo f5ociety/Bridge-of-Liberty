@@ -3,7 +3,7 @@
 
 Телеграм Бот для поиска информации прямо внутри мессенджера.
 
-Мы используем Google Search API и [**DuckDuckGo API**](https://api.duckduckgo.com/api) для быстрых ответов.
+Мы используем [**DuckDuckGo API**](https://api.duckduckgo.com/api) для быстрых ответов.
 
 Вы делаете запрос боту, и он вам возвращается ссылку (некоторые ссылки есть в виде [**Instant View**](https://instantview.telegram.org/), таким образом вы сможете прочитать сразу, не переходя на сайт).
 
@@ -11,7 +11,6 @@
 
 # Инструменты
 - Python
-- [**Google Search API**](https://github.com/abenassi/Google-Search-API)
 - [**DuckDuckGO API**](https://api.duckduckgo.com/api)
 - [**PyTelegramBot**](https://github.com/eternnoir/pyTelegramBotAPI)
 
@@ -19,3 +18,4 @@
 - LencoDigitexer
 - SeryiBaran
 - Erghel
+- NetStalker

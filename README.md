@@ -11,7 +11,7 @@
 
 # Инструменты
 - Python
-- [**DuckDuckGO API**](https://api.duckduckgo.com/api)
+- [**DuckDuckGo API**](https://api.duckduckgo.com/api)
 - [**PyTelegramBot**](https://github.com/eternnoir/pyTelegramBotAPI)
 
 # Команда (CLAY - Clown Laughing At You)

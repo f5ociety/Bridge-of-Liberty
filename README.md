@@ -14,7 +14,7 @@
 - [**DuckDuckGo API**](https://api.duckduckgo.com/api)
 - [**PyTelegramBot**](https://github.com/eternnoir/pyTelegramBotAPI)
 
-# Команда (CLAY - Clown Laughing At You)
+# Команда (CLAY - Clowns Laughing At You)
 - LencoDigitexer
 - SeryiBaran
 - Erghel

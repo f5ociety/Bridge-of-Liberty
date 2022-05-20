@@ -11,7 +11,7 @@
 Сам Телеграм выступает в качестве **Proxy-сервера** и умеет хранить в памяти ранее открытые **Instant View** ссылки (функция оффлайн просмотра), также в instant view карточках отсутствует **JavaScript**, что делает просмотр страниц в разы анонимнее.
 
 # Инструменты
-Для бота: 
+**Для бота:**
 - Python
 - [**DuckDuckGo API**](https://api.duckduckgo.com/api)
 - [**PyTelegramBot**](https://github.com/eternnoir/pyTelegramBotAPI)
@@ -19,7 +19,7 @@
 - [**Telegram Bots**](https://core.telegram.org/bots)
 - [**Web Archive**](https://archive.org/web/)
 
-Для сайта: 
+**Для сайта:** 
 - **HTML**
 - **CSS**
 

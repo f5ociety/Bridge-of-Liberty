@@ -11,7 +11,7 @@
 Сам Телеграм выступает в качестве **Proxy-сервера** и умеет хранить в памяти ранее открытые **Instant View** ссылки (функция оффлайн просмотра), также в instant view карточках отсутствует **JavaScript**, что делает просмотр страниц в разы анонимнее.
 
 # Beta Version
-Для Beta версии бота мы используем [**Onion search engine**](https://addons.mozilla.org/ru/firefox/addon/onion-search-engine/), которая позволяет нам предложить такую функцию как - "открыть через анонимайзер" и SearX хостера ([**https://searx.org/search**](https://searx.org/search))
+Для Beta версии бота мы используем [**Onion search engine**](https://addons.mozilla.org/ru/firefox/addon/onion-search-engine/), которая позволяет нам предложить такую функцию как - "открыть через анонимайзер" и SearX хостера ([**https://searx.org/search**](https://searx.org/search)), которая используется для выдачи обычых ответов. 
 
 # Инструменты
 **Для бота:**

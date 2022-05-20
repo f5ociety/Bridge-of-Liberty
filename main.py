@@ -3,10 +3,11 @@ from telebot import types
 import requests
 
 
-from config import token, search_domain
+from config import search_domain, anonimayzer_domain, use_anonimayzer
+from tokens import token_telegram
 
 
-bot = telebot.TeleBot(token, parse_mode=None) 
+bot = telebot.TeleBot(token_telegram, parse_mode=None) 
 
 
 
@@ -24,7 +25,11 @@ def echo_all(message):
     markup = types.InlineKeyboardMarkup()
     for i in range(0, 5):
         try:
-            webAppTest = types.WebAppInfo(r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
+            if use_anonimayzer:
+                webAppTest = types.WebAppInfo(anonimayzer_domain +  r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
+            else:
+                webAppTest = types.WebAppInfo(r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
+                
             markup.row(types.InlineKeyboardButton(r.json()["results"][i]["title"], web_app=webAppTest))
         except: pass
         

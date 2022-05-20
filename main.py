@@ -3,7 +3,7 @@ from telebot import types
 import requests
 
 
-from config import token
+from config import token, search_domain
 
 
 bot = telebot.TeleBot(token, parse_mode=None) 
@@ -20,7 +20,7 @@ def send_welcome(message):
     
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
-    r = requests.get("https://searx.prvcy.eu/search?q={}&format=json&safesearch=1".format(message.text))
+    r = requests.get(search_domain + "?q={}&format=json&safesearch=0&locales=ru".format(message.text))
     markup = types.InlineKeyboardMarkup()
     for i in range(0, 5):
         try:

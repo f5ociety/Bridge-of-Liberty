@@ -18,4 +18,3 @@
 - LencoDigitexer
 - SeryiBaran
 - Erghel
-- NetStalker

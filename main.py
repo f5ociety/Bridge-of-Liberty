@@ -3,7 +3,7 @@ from telebot import types
 import requests
 import json
 import ast
-
+from urllib.parse import unquote
 
 from config import search_domain, anonimayzer_domain, use_anonimayzer, search_engines, search_locales, savesearch, startMessage 
 from tokens import token_telegram
@@ -38,7 +38,7 @@ def echo_all(message):
         markup = types.InlineKeyboardMarkup()
         
         webAppTest = types.WebAppInfo(url) #создаем webappinfo - формат хранения url
-        markup.row(types.InlineKeyboardButton(url, web_app=webAppTest))
+        markup.row(types.InlineKeyboardButton(unquote(url), web_app=webAppTest))
         
         webAppTest = types.WebAppInfo(anonimayzer_domain + url) #создаем webappinfo - формат хранения url
         markup.row(types.InlineKeyboardButton("Открыть в анонимайзере", web_app=webAppTest))
@@ -79,7 +79,7 @@ def echo_all(message):
                 print(r.json()["results"][i]["url"])
                 ### УБИРАЕМ ВСЕ bing.com ссылки
                 if(("bing.com" in r.json()["results"][i]["url"]) == False):
-                    markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], callback_data=str(i)))
+                    markup.row(types.InlineKeyboardButton(unquote(r.json()["results"][i]["url"]), callback_data=str(i)))
             except:
                 pass
             
@@ -150,7 +150,7 @@ def handle(call):
             #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], web_app=webAppTest))
             #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["title"], callback_data=json.dumps({"key":"value"})))
             
-            markup.row(types.InlineKeyboardButton(js["results"][i]["url"], callback_data=str(i)))
+            markup.row(types.InlineKeyboardButton(unquote(js["results"][i]["url"]), callback_data=str(i)))
             
         ### БЫСТРЫЙ ОТВЕТ ОТ DUCKDUCKGO ###    
         headers = {
@@ -196,7 +196,7 @@ def handle(call):
         markup = types.InlineKeyboardMarkup()
             
         webAppTest = types.WebAppInfo(url) #создаем webappinfo - формат хранения url
-        markup.row(types.InlineKeyboardButton(url, web_app=webAppTest))
+        markup.row(types.InlineKeyboardButton(unquote(url), web_app=webAppTest))
             
         webAppTest = types.WebAppInfo(anonimayzer_domain + url) #создаем webappinfo - формат хранения url
         markup.row(types.InlineKeyboardButton("Открыть в анонимайзере", web_app=webAppTest))

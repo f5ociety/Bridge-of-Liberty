@@ -1,6 +1,7 @@
 import telebot
 from telebot import types
 import requests
+import json
 
 
 from config import search_domain, anonimayzer_domain, use_anonimayzer
@@ -9,6 +10,7 @@ from tokens import token_telegram
 
 bot = telebot.TeleBot(token_telegram, parse_mode=None) 
 
+global r
 
 
 @bot.message_handler(commands=['start', 'help'])
@@ -26,10 +28,12 @@ def echo_all(message):
     ### ОБРАБОТКА ССЫЛКИ - ОТКРЫТИЕ ССЫЛКИ ЛЮБЫМ ДОСТУПНЫМ СПОСОБОМ
     if message.text.startswith("http://") or message.text.startswith("https://"):
         
+        # ПЕРЕВОДИМ САЙТ В HTTPS
         url: str = message.text
-        
         url = url.replace("http://", "https://", 1)
         
+        #---------------------
+        # СОЗДАЕМ КНОПКИ
         markup = types.InlineKeyboardMarkup()
         
         webAppTest = types.WebAppInfo(url) #создаем webappinfo - формат хранения url
@@ -45,37 +49,41 @@ def echo_all(message):
         markup.row(types.InlineKeyboardButton("Web Archive", web_app=webAppTest))
         
         bot.send_message(message.chat.id, '[Открыть в браузере\n](' + url + ')', reply_markup=markup, parse_mode="markdown")
+        #-------------------------
         
     ### ПОИСК ИНФОРМАЦИИ В ПОИСКОВОЙ СИСТЕМЕ
     else:
         r = requests.get(search_domain[0] + "?q={}&format=json&safesearch=0&locales=ru".format(message.text))
+        
+        ### ЕСЛИ API ЗАБАНЕН, ТО МЕНЯЕМ API ИЗ СПИСКА И ПОЛУЧАЕМ ОТВЕТ
         i = 0
-        if(r.text == "Rate limit exceeded"):
-            print("ЛИМИТ!!!!!!!!1")
         while(r.text == "Rate limit exceeded"):
             i = i + 1
             r = requests.get(search_domain[i] + "?q={}&format=json&safesearch=0&locales=ru".format(message.text))
             print("поменял api на " + search_domain[i])
+            print(r.text)
         
+
+        #-------------------------
+        ## СОЗДАЕМ КНОПКИ
         markup = types.InlineKeyboardMarkup()
         for i in range(0, 5):
-            try:
-                if use_anonimayzer:
-                    webAppTest = types.WebAppInfo(anonimayzer_domain +  r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
-                else:
-                    url: str = r.json()["results"][i]["url"]
-                    if url.startswith("http://"):
-        
-                        url = url.replace("http://", "https://", 1)
+            if use_anonimayzer:
+                webAppTest = types.WebAppInfo(anonimayzer_domain +  r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
+            else:
+                url: str = r.json()["results"][i]["url"]
+                if url.startswith("http://"):
+                    url = url.replace("http://", "https://", 1)
                         
-                        webAppTest = types.WebAppInfo(url) #создаем webappinfo - формат хранения url
-                    else:
-                        webAppTest = types.WebAppInfo(r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
+                    webAppTest = types.WebAppInfo(url) #создаем webappinfo - формат хранения url
+                else:
+                    webAppTest = types.WebAppInfo(r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
                     
-                markup.row(types.InlineKeyboardButton(r.json()["results"][i]["title"], web_app=webAppTest))
-                #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["title"], callback_data=json.dumps({"key":"value"})))
-            except: pass
+            #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], web_app=webAppTest))
+            #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["title"], callback_data=json.dumps({"key":"value"})))
             
+            markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], callback_data=str(i)))
+
             
             
         ### БЫСТРЫЙ ОТВЕТ ОТ DUCKDUCKGO ###    
@@ -95,24 +103,57 @@ def echo_all(message):
             'sec-fetch-dest': 'document',
             'accept-language': 'ru,en;q=0.9',
         }
-
-        
         params = {
             'q': message.text,
             'format': 'json',
         }
-
         response = requests.get('https://api.duckduckgo.com/', params=params, headers=headers)
-        ### ------------------ ###
+        ###-------------------------------------
         
         bot.send_message(message.chat.id, "Быстрый ответ\n\n" + str(response.json()["Abstract"]), reply_markup=markup)
+        #bot.send_message(message.chat.id, "Быстрый ответ\n\n", reply_markup=markup)
 
-
+''' ЭТА ШТУКА НЕ РАБОТАЕТ
 @bot.callback_query_handler(func=lambda call: True)
 def handle(call):
-    print(call)
-    #bot.send_message(call.message.chat.id, 'Data: {}'.format(str(call.data)))
-    #bot.answer_callback_query(call.id)
+    print(call.data)
+
+    bot.send_message(call.message.chat.id, '{}'.format(str(call.data)))
+    bot.answer_callback_query(call.id)
+    '''
+    
+### ДЛЯ ИЗМЕНЕНИЯ СООБЩЕНИЯ
+@bot.callback_query_handler(lambda call: True)
+def handle(call):
+
+    print(call.message.json["reply_markup"]["inline_keyboard"][int(call.data)][0]["text"])
+    
+    # ПЕРЕВОДИМ САЙТ В HTTPS
+    url: str = call.message.json["reply_markup"]["inline_keyboard"][int(call.data)][0]["text"]
+    url = url.replace("http://", "https://", 1)
+        
+    #---------------------
+    # СОЗДАЕМ КНОПКИ
+    markup = types.InlineKeyboardMarkup()
+        
+    webAppTest = types.WebAppInfo(url) #создаем webappinfo - формат хранения url
+    markup.row(types.InlineKeyboardButton(url, web_app=webAppTest))
+        
+    webAppTest = types.WebAppInfo(anonimayzer_domain + url) #создаем webappinfo - формат хранения url
+    markup.row(types.InlineKeyboardButton("Открыть в анонимайзере", web_app=webAppTest))
+        
+    webAppTest = types.WebAppInfo("https://webcache.googleusercontent.com/search?q=cache:" + url) #создаем webappinfo - формат хранения url
+    markup.row(types.InlineKeyboardButton("Google Cache", web_app=webAppTest))
+        
+    webAppTest = types.WebAppInfo("https://web.archive.org/web/" + url) #создаем webappinfo - формат хранения url
+    markup.row(types.InlineKeyboardButton("Web Archive", web_app=webAppTest))
+        
+    bot.send_message(call.message.chat.id, '[Открыть в браузере\n](' + url + ')', reply_markup=markup, parse_mode="markdown")
+    #-------------------------
+
+    '''
+    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text=call.data)
+    bot.answer_callback_query(call.id)'''
 
 #time.sleep(1)
 bot.remove_webhook()

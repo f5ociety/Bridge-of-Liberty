@@ -5,7 +5,7 @@ import json
 import ast
 
 
-from config import search_domain, anonimayzer_domain, use_anonimayzer, startMessage
+from config import search_domain, anonimayzer_domain, use_anonimayzer, search_engines, search_locales, savesearch, startMessage 
 from tokens import token_telegram
 
 
@@ -61,7 +61,7 @@ def echo_all(message):
         i = 0
         while(r.text == "Rate limit exceeded"):
             i = i + 1
-            r = requests.get(search_domain[i] + "?q={}&format=json&safesearch=0&locales=ru&engines=duckduckgo".format(message.text))
+            r = requests.get(search_domain[i] + "?q={}&format=json&safesearch={}&locales={}&engines={}".format(message.text, savesearch, search_locales, search_engines))
             print("поменял api на " + search_domain[i])
             print(r.text)
         

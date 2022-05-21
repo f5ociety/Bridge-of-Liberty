@@ -56,13 +56,12 @@ def echo_all(message):
     else:
         r = requests.get(search_domain[0] + "?q={}&format=json&safesearch=0&locales=ru".format(message.text))
         
-        print(r.text)
         
         ### ЕСЛИ API ЗАБАНЕН, ТО МЕНЯЕМ API ИЗ СПИСКА И ПОЛУЧАЕМ ОТВЕТ
         i = 0
         while(r.text == "Rate limit exceeded"):
             i = i + 1
-            r = requests.get(search_domain[i] + "?q={}&format=json&safesearch=0&locales=ru".format(message.text))
+            r = requests.get(search_domain[i] + "?q={}&format=json&safesearch=0&locales=ru&engines=duckduckgo".format(message.text))
             print("поменял api на " + search_domain[i])
             print(r.text)
         
@@ -75,27 +74,15 @@ def echo_all(message):
         ## СОЗДАЕМ КНОПКИ
         markup = types.InlineKeyboardMarkup()
         for i in range(0, 8):
+            try:
             
-            ## СТАРЫЙ КОД, КОГДА ИСПОЛЬЗОВАЛИ ОТКРЫТИЕ СТРАНИЦЫ СРАЗУ В TELEGRAM WEB APPS
-            '''
-            if use_anonimayzer:
-                webAppTest = types.WebAppInfo(anonimayzer_domain +  r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
-            else:
-                url: str = r.json()["results"][i]["url"]
-                if url.startswith("http://"):
-                    url = url.replace("http://", "https://", 1)
-                        
-                    webAppTest = types.WebAppInfo(url) #создаем webappinfo - формат хранения url
-                else:
-                    webAppTest = types.WebAppInfo(r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
-            '''
-                    
-            #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], web_app=webAppTest))
-            #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["title"], callback_data=json.dumps({"key":"value"})))
+                print(r.json()["results"][i]["url"])
+                ### УБИРАЕМ ВСЕ bing.com ссылки
+                if(("bing.com" in r.json()["results"][i]["url"]) == False):
+                    markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], callback_data=str(i)))
+            except:
+                pass
             
-            ### УБИРАЕМ ВСЕ bing.com ссылки
-            if(("bing.com" in r.json()["results"][i]["url"]) == False):
-                markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], callback_data=str(i)))
             
 
             
@@ -124,7 +111,7 @@ def echo_all(message):
         response = requests.get('https://api.duckduckgo.com/', params=params, headers=headers)
         ###-------------------------------------
         
-        bot.send_message(message.chat.id, "Быстрый ответ\n\n" + str(response.json()["Abstract"]), reply_markup=markup)
+        bot.send_message(message.chat.id, "Провайдер " + search_domain[i] + "\nБыстрый ответ\n\n" + str(response.json()["Abstract"]), reply_markup=markup)
         #bot.send_message(message.chat.id, "Быстрый ответ\n\n", reply_markup=markup)
 
 ''' ЭТА ШТУКА НЕ РАБОТАЕТ
@@ -148,7 +135,7 @@ def handle(call):
         #-------------------------
         ## СОЗДАЕМ КНОПКИ
         markup = types.InlineKeyboardMarkup()
-        for i in range(0, 5):
+        for i in range(0, 8):
             if use_anonimayzer:
                 webAppTest = types.WebAppInfo(anonimayzer_domain +  js["results"][i]["url"]) #создаем webappinfo - формат хранения url
             else:
@@ -189,7 +176,7 @@ def handle(call):
         response = requests.get('https://api.duckduckgo.com/', params=params, headers=headers)
         ###-------------------------------------
         
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text="Быстрый ответ\n\n" + str(response.json()["Abstract"]), reply_markup=markup)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text="Провайдер " + search_domain[i] + "\nБыстрый ответ\n\n" + str(response.json()["Abstract"]), reply_markup=markup)
     
     else:
     

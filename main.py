@@ -21,6 +21,9 @@ def send_welcome(message):
     
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
+    
+    
+    ### ОБРАБОТКА ССЫЛКИ - ОТКРЫТИЕ ССЫЛКИ ЛЮБЫМ ДОСТУПНЫМ СПОСОБОМ
     if message.text.startswith("http://") or message.text.startswith("https://"):
         
         url: str = message.text
@@ -42,9 +45,18 @@ def echo_all(message):
         markup.row(types.InlineKeyboardButton("Web Archive", web_app=webAppTest))
         
         bot.send_message(message.chat.id, '[Открыть в браузере\n](' + url + ')', reply_markup=markup, parse_mode="markdown")
+        
+    ### ПОИСК ИНФОРМАЦИИ В ПОИСКОВОЙ СИСТЕМЕ
     else:
-        r = requests.get(search_domain + "?q={}&format=json&safesearch=0&locales=ru".format(message.text))
-        print(r.text)
+        r = requests.get(search_domain[0] + "?q={}&format=json&safesearch=0&locales=ru".format(message.text))
+        i = 0
+        if(r.text == "Rate limit exceeded"):
+            print("ЛИМИТ!!!!!!!!1")
+        while(r.text == "Rate limit exceeded"):
+            i = i + 1
+            r = requests.get(search_domain[i] + "?q={}&format=json&safesearch=0&locales=ru".format(message.text))
+            print("поменял api на " + search_domain[i])
+        
         markup = types.InlineKeyboardMarkup()
         for i in range(0, 5):
             try:
@@ -61,8 +73,12 @@ def echo_all(message):
                         webAppTest = types.WebAppInfo(r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
                     
                 markup.row(types.InlineKeyboardButton(r.json()["results"][i]["title"], web_app=webAppTest))
+                #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["title"], callback_data=json.dumps({"key":"value"})))
             except: pass
             
+            
+            
+        ### БЫСТРЫЙ ОТВЕТ ОТ DUCKDUCKGO ###    
         headers = {
             'authority': 'api.duckduckgo.com',
             'pragma': 'no-cache',
@@ -87,9 +103,16 @@ def echo_all(message):
         }
 
         response = requests.get('https://api.duckduckgo.com/', params=params, headers=headers)
+        ### ------------------ ###
         
         bot.send_message(message.chat.id, "Быстрый ответ\n\n" + str(response.json()["Abstract"]), reply_markup=markup)
 
+
+@bot.callback_query_handler(func=lambda call: True)
+def handle(call):
+    print(call)
+    #bot.send_message(call.message.chat.id, 'Data: {}'.format(str(call.data)))
+    #bot.answer_callback_query(call.id)
 
 #time.sleep(1)
 bot.remove_webhook()

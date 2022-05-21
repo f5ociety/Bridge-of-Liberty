@@ -5,7 +5,12 @@ def best_server():
         "https://timdor.noip.me/searx/search",
         "https://searx.run/search",
         "https://searx.sethforprivacy.com/search",
-        "https://searx.kujonello.cf/search"
+        "https://searx.kujonello.cf/search",
+        "https://searx.nevrlands.de/searx/search",
+        "https://searx.divided-by-zero.eu/search",
+        "https://searx.bissisoft.com/search",
+        "https://search.jpope.org/search",
+        "https://searx.sp-codes.de/search"
     ]
     
     return servers

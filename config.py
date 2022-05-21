@@ -22,3 +22,9 @@ search_domain = best_server()
 anonimayzer_domain = "https://onionsearchengine.com/url.php?u="
 
 use_anonimayzer = True
+
+startMessage = '''Этот бот использует несколько технологий, чтобы предоставить доступ к заблокированному ресурсу. 
+
+Введите запрос как в обычный поисковик и получите ответ.
+
+Отправьте боту ссылку(обязательно с "https://" в начале), чтобы открыть её внутри Telegram'''

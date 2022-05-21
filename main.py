@@ -5,7 +5,7 @@ import json
 import ast
 
 
-from config import search_domain, anonimayzer_domain, use_anonimayzer
+from config import search_domain, anonimayzer_domain, use_anonimayzer, startMessage
 from tokens import token_telegram
 
 
@@ -19,7 +19,7 @@ def send_welcome(message):
 
 
     a = telebot.types.ReplyKeyboardRemove()
-    bot.send_message(message.chat.id, "Напишите ваш запрос", reply_markup=a)
+    bot.send_message(message.chat.id, startMessage, reply_markup=a)
     
     
 @bot.message_handler(func=lambda m: True)

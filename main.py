@@ -59,7 +59,7 @@ def echo_all(message):
         custom_search = str(message.text).split(":")
         
         ### ПОИСК ПО НОВОСТЯМ
-        if(lower(custom_search[0]) == "news"):
+        if(custom_search[0].lower() == "news"):
             r = requests.get(search_domain[0] + "?q={}&format=json&safesearch={}&locales={}&categories=news".format(custom_search[1], savesearch, search_locales))
             
             

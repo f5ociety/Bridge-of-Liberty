@@ -74,7 +74,10 @@ def echo_all(message):
         #-------------------------
         ## СОЗДАЕМ КНОПКИ
         markup = types.InlineKeyboardMarkup()
-        for i in range(0, 5):
+        for i in range(0, 8):
+            
+            ## СТАРЫЙ КОД, КОГДА ИСПОЛЬЗОВАЛИ ОТКРЫТИЕ СТРАНИЦЫ СРАЗУ В TELEGRAM WEB APPS
+            '''
             if use_anonimayzer:
                 webAppTest = types.WebAppInfo(anonimayzer_domain +  r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
             else:
@@ -85,11 +88,15 @@ def echo_all(message):
                     webAppTest = types.WebAppInfo(url) #создаем webappinfo - формат хранения url
                 else:
                     webAppTest = types.WebAppInfo(r.json()["results"][i]["url"]) #создаем webappinfo - формат хранения url
+            '''
                     
             #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], web_app=webAppTest))
             #markup.row(types.InlineKeyboardButton(r.json()["results"][i]["title"], callback_data=json.dumps({"key":"value"})))
             
-            markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], callback_data=str(i)))
+            ### УБИРАЕМ ВСЕ bing.com ссылки
+            if(("bing.com" in r.json()["results"][i]["url"]) == False):
+                markup.row(types.InlineKeyboardButton(r.json()["results"][i]["url"], callback_data=str(i)))
+            
 
             
             

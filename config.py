@@ -1,5 +1,6 @@
 def best_server():
     servers = [
+        "http://908865-cu13401.tmweb.ru/searx/search", ## СЕРВЕР КОМАНДЫ CLAY
         "https://searx.org/search",
         "https://timdor.noip.me/searx/search",
         "https://searx.run/search",

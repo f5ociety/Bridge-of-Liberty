@@ -4,14 +4,20 @@
 Телеграм Бот для поиска и просмотра информации прямо внутри мессенджера.
 
 # Как работает Telegram Bot?
-Мы используем [**DuckDuckGo API**](https://api.duckduckgo.com/api) для быстрых ответов и поисковую систему **SearXNG** через которую мы также собираем ответы. 
+Мы используем [**DuckDuckGo API**](https://api.duckduckgo.com/api) для быстрых ответов и поисковую систему **SearX** через которую мы также собираем ответы, у нас несколько хостеров, которых мы взяли для демо-представления. 
 
 Вы делаете запрос боту, и он вам возвращает вам список ссылок (5 штук), нажав на одну вы поподаете на карточку сайта (некоторые сайты есть в виде [**Instant View**](https://instantview.telegram.org/), таким образом вы сможете прочитать сразу, не переходя на сайт), где можете выбрать метод открытия сайта - с помощью Proxy, развернутого на сервере [**Telegram Web Apps**](https://core.telegram.org/bots/webapps), с помощью [**Web Archive**](https://archive.org/web/) или с помощью других иструментов, которые мы дполним позже.
 
 Сам Телеграм выступает в качестве **Proxy-сервера** и умеет хранить в памяти ранее открытые **Instant View** ссылки (функция оффлайн просмотра), также в instant view карточках отсутствует **JavaScript**, что делает просмотр страниц в разы анонимнее.
 
 # Beta Version
-Для Beta версии бота мы используем [**Onion search engine**](https://addons.mozilla.org/ru/firefox/addon/onion-search-engine/), которая позволяет нам предложить такую функцию как - "открыть через анонимайзер" и SearX хостера ([**https://searx.org/search**](https://searx.org/search)), которая используется для выдачи обычых ответов. 
+Для Beta версии бота мы используем [**Onion search engine**](https://addons.mozilla.org/ru/firefox/addon/onion-search-engine/), которая позволяет нам предложить такую функцию как - "открыть через анонимайзер" и SearX хостеров ([**https://searx.space/**](https://searx.space/)), которая используется для выдачи обычых ответов. 
+
+# Будущее
+- [ ] развернем YaCy и SearX на своих серверах, отказавшись от посторинник хостеров 
+- [ ] развернем свой Web-proxy, чтобы отказаться от постороннего 
+- [ ] сделаем карточки для каждого сайта из выдачи
+- [ ] сделаем красивый веб-сайт, которые познакомит пользователя с ботом 
 
 # Инструменты
 **Для бота:**
@@ -21,14 +27,13 @@
 - [**SearXNG**](https://github.com/searxng/searxng) 
 - [**Telegram Bots**](https://core.telegram.org/bots)
 - [**Web Archive**](https://archive.org/web/)
+- и другие инструменты, которые мы пока внедряем 
 
 **Для сайта:** 
 - **HTML**
-- **CSS**
+- **CSS (+Less/SCSS)**
 
 # Команда (CLAY - Clowns Laughing At You)
 - **LencoDigitexer** (Telegram Bot + Pitching)
 - **SeryiBaran** (Frontend + license)
 - **Erghel** (Frontend + Documentation)
-
-

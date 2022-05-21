@@ -24,7 +24,7 @@
 - Python
 - [**DuckDuckGo API**](https://api.duckduckgo.com/api)
 - [**PyTelegramBot**](https://github.com/eternnoir/pyTelegramBotAPI)
-- [**SearXNG**](https://github.com/searxng/searxng) 
+- [**SearXNG**](https://github.com/searxng/searxng) и [**SearX**](https://github.com/searx/searx)
 - [**Telegram Bots**](https://core.telegram.org/bots)
 - [**Web Archive**](https://archive.org/web/)
 - и другие инструменты, которые мы пока внедряем 

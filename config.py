@@ -1,7 +1,6 @@
 def best_server():
     servers = [
         "https://searx.org/search",
-        "https://jsearch.pw/searx/search",
         "https://timdor.noip.me/searx/search",
         "https://searx.run/search",
         "https://searx.sethforprivacy.com/search",

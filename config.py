@@ -25,6 +25,7 @@ anonimayzer_domain = "https://onionsearchengine.com/url.php?u="
 use_anonimayzer = True
 
 # поисковой движок для поиска
+# Оффициальная документация SearX - https://searx.github.io/searx/dev/search_api.html
 # уставьте пустым, если хотите использовать движки, которые по умолчанию поставил администратор сервера searx
 # названия поисковых систем возьмите отсюда - https://searx.be/preferences
 # можно поставить all и тогда будет искаться по всем доступным движкам

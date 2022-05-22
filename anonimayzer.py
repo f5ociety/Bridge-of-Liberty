@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 from urllib.parse import urlparse
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from webdriver_manager.firefox import GeckoDriverManager

@@ -73,10 +73,10 @@ def echo_all(message):
         else:
             r = requests.get(search_domain[0] + "?q={}&format=json&safesearch={}&locales={}&engines={}".format(message.text, savesearch, search_locales, search_engines))
             
-            
+            print(r.text)
             ### ЕСЛИ API ЗАБАНЕН, ТО МЕНЯЕМ API ИЗ СПИСКА И ПОЛУЧАЕМ ОТВЕТ
             i = 0
-            while(r.text == "Rate limit exceeded"):
+            while(r.text == "Rate limit exceeded" or len(r.json()["results"]) < 3):
                 i = i + 1
                 r = requests.get(search_domain[i] + "?q={}&format=json&safesearch={}&locales={}&engines={}".format(message.text, savesearch, search_locales, search_engines))
                 print("поменял api на " + search_domain[i])

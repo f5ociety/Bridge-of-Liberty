@@ -33,7 +33,7 @@ def search():
         profile.set_preference("network.proxy.autoconfig_url", myProxy)
         profile.update_preferences() 
 
-        br = webdriver.Firefox(service=Service(GeckoDriverManager().install()), firefox_profile=profile)
+        br = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options, firefox_profile=profile)
         
         #br.install_addon("censor_tracker-5.3.1.0.xpi", temporary=True)
         

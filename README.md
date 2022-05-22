@@ -1,4 +1,4 @@
-# Telegram-Search-Bot (Anticensorship service)
+# Telegram-Search-Bot (Мост Свободы)
 Проект для Хакатона от [**РосКомСвободы**](https://roskomsvoboda.org/) ([**demhack 4**](https://demhack.ru/)).
 
 Телеграм Бот для поиска и просмотра информации прямо внутри мессенджера.

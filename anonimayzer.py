@@ -24,22 +24,16 @@ def search():
         options.add_argument("--headless")
         options.add_argument('--ignore-certificate-errors-spki-list')
         
-        chop = webdriver.ChromeOptions()
-        chop.add_extension("antocensor.crx")
         
         myProxy = "https://antizapret.prostovpn.org/proxy.pac"
 
-        proxy = Proxy({
-            'proxyType': ProxyType.MANUAL,
-            'proxyOptions': myProxy
-            })
         
         profile = webdriver.FirefoxProfile() 
         profile.set_preference("network.proxy.type", 2)
         profile.set_preference("network.proxy.autoconfig_url", myProxy)
         profile.update_preferences() 
 
-        br = webdriver.Firefox(service=Service(GeckoDriverManager().install()), proxy=proxy, firefox_profile=profile)
+        br = webdriver.Firefox(service=Service(GeckoDriverManager().install()), firefox_profile=profile)
         
         #br.install_addon("censor_tracker-5.3.1.0.xpi", temporary=True)
         

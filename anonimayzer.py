@@ -9,6 +9,7 @@ app = Flask(__name__)
 from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 
@@ -17,8 +18,9 @@ def search():
     error = None
     query = request.args.get('query')
     if query and query != '':
-        
-        br = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        options = Options()
+        options.add_argument("--headless")
+        br = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         br.get(query)
 
         with open("templates/index.html", "w", encoding="utf-8") as f:

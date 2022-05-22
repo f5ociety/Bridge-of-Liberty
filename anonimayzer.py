@@ -9,7 +9,7 @@ app = Flask(__name__)
 from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from webdriver_manager.firefox import GeckoDriverManager
 
@@ -20,7 +20,7 @@ def search():
     error = None
     query = request.args.get('query')
     if query and query != '':
-        options = FirefoxOptions()
+        options = Options()
         options.headless = True
         
         
@@ -32,7 +32,7 @@ def search():
         profile.set_preference("network.proxy.autoconfig_url", myProxy)
         profile.update_preferences() 
 
-        br = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options, firefox_profile=profile)
+        br = webdriver.Firefox(service=Service(GeckoDriverManager(log_level=0, print_first_line=False, cache_valid_range=10).install()), options=options, firefox_profile=profile)
         
         #br.install_addon("censor_tracker-5.3.1.0.xpi", temporary=True)
         

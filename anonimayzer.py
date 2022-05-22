@@ -9,7 +9,7 @@ app = Flask(__name__)
 from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from webdriver_manager.firefox import GeckoDriverManager
 
@@ -20,9 +20,8 @@ def search():
     error = None
     query = request.args.get('query')
     if query and query != '':
-        options = Options()
-        options.add_argument("--headless")
-        options.add_argument('--ignore-certificate-errors-spki-list')
+        options = FirefoxOptions()
+        options.headless = True
         
         
         myProxy = "https://antizapret.prostovpn.org/proxy.pac"

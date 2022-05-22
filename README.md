@@ -25,7 +25,7 @@
 
 **Для сайта:** 
 - **HTML**
-- **CSS (+Less/SCSS)**
+- **CSS (+SCSS)**
 
 # Команда (CLAY - Clowns Laughing At You)
 - **LencoDigitexer** (Telegram Bot + Pitching)

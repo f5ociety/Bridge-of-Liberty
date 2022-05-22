@@ -20,7 +20,7 @@ def best_server():
 search_domain = best_server()
 
 # OnionSearchEngine - поисковик, использующий Tor Exit Node, для функции анонимайзера/веб-прокси
-anonimayzer_domain = "https://onionsearchengine.com/url.php?u="
+anonimayzer_domain = "http://213.226.127.137:5000/anon/?query="
 
 use_anonimayzer = True
 

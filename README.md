@@ -17,22 +17,23 @@
 
 # Инструменты
 **Для бота:**
-- Python
-- [**DuckDuckGo API**](https://api.duckduckgo.com/api)
-- [**PyTelegramBot**](https://github.com/eternnoir/pyTelegramBotAPI)
-- [**SearXNG**](https://github.com/searxng/searxng) и [**SearX**](https://github.com/searx/searx)
-- [**Telegram Bots**](https://core.telegram.org/bots)
-- [**Web Archive**](https://archive.org/web/)
-- и другие инструменты, которые мы пока внедряем 
+- **Python**
+- [**DuckDuckGo API**](https://api.duckduckgo.com/api) - для функции быстрых ответов
+- [**PyTelegramBot**](https://github.com/eternnoir/pyTelegramBotAPI) - для создания **Бота**
+- [**SearXNG**](https://github.com/searxng/searxng) и [**SearX**](https://github.com/searx/searx) - для функции поиска внутри **Telegram**
+- [**Telegram Web Apps**](https://core.telegram.org/bots) - для создания браузерного окна внутри **Telegram**
+- [**Web Archive**](https://archive.org/web/) - для обхода блокировок с помощью **Web Archive**
+- [**Flask**](https://github.com/pallets/flask) - для собственного **Анонимайзера** 
+- **Google Cache** и **Onion Search Engine** - для обхода блокировок
 
 **Для сайта:** 
 - **HTML**
 - **CSS (+SCSS)**
 
 # Команда (CLAY - Clowns Laughing At You)
-- **LencoDigitexer** (Telegram Bot + Pitching)
-- **SeryiBaran** (Frontend + license)
-- **Erghel** (Frontend + Documentation)
+- **LencoDigitexer** (Telegram Bot + Pitching) - **Main Developer** 
+- **SeryiBaran** (Frontend + license) - **Frontend**
+- **Erghel** (Frontend + Documentation) - **Captain**
 
 # Будущее
 - [ ] развернем YaCy и SearX на своих серверах, отказавшись от посторинник хостеров 

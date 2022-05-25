@@ -30,7 +30,7 @@
 - **HTML**
 - **CSS (+SCSS)**
 
-# Команда (CLAY - Clowns Laughing At You)
+# Команда (CLAY - Clowns Laughing At You) - 8th Place
 - **LencoDigitexer** (Telegram Bot + Pitching) - **Main Developer** 
 - **SeryiBaran** (Frontend + license) - **Frontend**
 - **Erghel** (Frontend + Documentation) - **Captain**

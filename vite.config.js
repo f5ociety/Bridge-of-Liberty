@@ -3,7 +3,7 @@ const { resolve } = require('path');
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/Telegram-Search-Bot/',
+  base: '/Bridge-of-Liberty/',
   build: {
     rollupOptions: {
       input: {
